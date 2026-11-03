@@ -11,7 +11,7 @@ from model.bertmodel import MyBertModel
 from model.lstmmodel import LSTMModel
 import torch
 from parameters import BERT_MODEL_PATH, CLAIM_ONLY, CLAIM_AND_EVIDENCE, EVIDENCE_ONLY, DEVICE, INPUT_TYPE_ORDER
-from transformers import AdamW
+from torch.optim import AdamW
 import numpy as np
 from utils.utils import print_message, clean_str
 from sklearn.metrics import f1_score
@@ -23,6 +23,13 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.ensemble import RandomForestClassifier
 from hypopt import GridSearch
 from tqdm import tqdm
+import sklearn.metrics._scorer
+if not hasattr(sklearn.metrics._scorer, '_PredictScorer'):
+    class _DummyScorer:
+        pass
+    sklearn.metrics._scorer._PredictScorer = _DummyScorer
+    sklearn.metrics._scorer._ProbaScorer = _DummyScorer
+    sklearn.metrics._scorer._ThresholdScorer = _DummyScorer
 
 def load_data(dataset):
     path = "../../multi_fc_publicdata/" + dataset + "/"

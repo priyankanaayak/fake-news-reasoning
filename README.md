@@ -15,3 +15,8 @@ Casper Hansen, Christian Hansen, Lucas Chaves Lima (2021). Automatic Fake News D
 
 
 
+
+## Execution & Results (Mac M1)
+Successful execution of the Bag of Words (`bow`) model on the Snopes dataset (`snes`) using claim-only inputs:
+
+![Successful Model Execution](screenshots/execution_success.png)
